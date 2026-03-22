@@ -1,0 +1,55 @@
+name: PR Issue Link Enforcement
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, labeled, unlabeled, ready_for_review]
+
+jobs:
+  require-issue-link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR has linked issue and evidence artifacts
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const body = pr.body || "";
+            const title = pr.title || "";
+            const labels = (pr.labels || []).map(l => l.name);
+
+            const hasBootstrapException = labels.includes("exception:bootstrap");
+
+            const issuePatterns = [
+              /(close[sd]?|fix(e[sd])?|resolve[sd]?)\s+#\d+/i,
+              /(close[sd]?|fix(e[sd])?|resolve[sd]?)\s+https:\/\/github\.com\/.+\/issues\/\d+/i,
+              /related\s+to\s+#\d+/i,
+              /issue\s+#\d+/i
+            ];
+
+            const text = `${title}\n${body}`;
+            const hasIssueLink = issuePatterns.some((p) => p.test(text));
+
+            const evidenceRequirements = [
+              { key: "summary", regex: /^##\s*Summary\b/im, hint: "Add a '## Summary' section." },
+              { key: "why", regex: /^##\s*Why\b/im, hint: "Add a '## Why' section." },
+              { key: "tests", regex: /^##\s*Tests\b/im, hint: "Add a '## Tests' section." },
+              { key: "risk", regex: /^##\s*Risk\s*&\s*Rollback\b/im, hint: "Add a '## Risk & Rollback' section." },
+              { key: "security", regex: /^##\s*Security\s*&\s*Data\b/im, hint: "Add a '## Security & Data' section." }
+            ];
+
+            const missingEvidence = evidenceRequirements
+              .filter((req) => !req.regex.test(body))
+              .map((req) => req.hint);
+
+            if (!hasIssueLink && !hasBootstrapException) {
+              core.setFailed(
+                "PR must link an issue (e.g. 'Closes #123'). Only first-time repo bootstrap PRs may use label 'exception:bootstrap'."
+              );
+              return;
+            }
+
+            if (missingEvidence.length > 0 && !hasBootstrapException) {
+              core.setFailed(
+                `PR description is missing required evidence sections: ${missingEvidence.join(" ")}`
+              );
+            }
