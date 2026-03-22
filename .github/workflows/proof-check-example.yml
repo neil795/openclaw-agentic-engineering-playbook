@@ -1,0 +1,13 @@
+name: Proof Bundle Check (Example)
+
+on:
+  pull_request:
+
+jobs:
+  guidance-only:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Guidance
+        run: |
+          echo "This is an example workflow."
+          echo "Implement org-specific issue-link and proof-bundle checks here."
