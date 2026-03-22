@@ -47,6 +47,7 @@ This repository distills battle-tested patterns from real-world execution into p
 - Validation evidence: `docs/release/validation-evidence.md`
 - Local container runbook: `docs/deploy/local-container.md`
 - Container build pipeline: `docs/deploy/container-pipeline.md`
+- k3d deployment runbook: `docs/deploy/k3d-deploy.md`
 
 ## License
 
