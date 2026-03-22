@@ -1,0 +1,112 @@
+name: CI Guardrails
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, labeled, unlabeled, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+
+jobs:
+  area-label-scope-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enforce changed-files scope from issue area label
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issueNumberMatch = `${pr.title || ""}\n${pr.body || ""}`.match(/#(\d+)/);
+
+            if (!issueNumberMatch) {
+              core.setFailed("Could not determine linked issue number from PR title/body. Include 'Closes #<number>' in PR.");
+              return;
+            }
+
+            const issue_number = Number(issueNumberMatch[1]);
+            const issue = await github.rest.issues.get({ owner, repo, issue_number });
+            const issueLabels = (issue.data.labels || []).map((l) => typeof l === "string" ? l : l.name);
+            const areaLabels = issueLabels.filter((l) => /^area:/.test(l));
+
+            if (areaLabels.length !== 1) {
+              core.setFailed(`Linked issue #${issue_number} must have exactly one area:* label. Found: ${areaLabels.join(", ") || "none"}`);
+              return;
+            }
+
+            const area = areaLabels[0];
+            const allowlistByArea = {
+              "area:infra": [".github/", "docs/", "frameworks/", "templates/", "case-studies/", "content/", "src/", "public/", ".gitignore", "README.md", "CONTRIBUTING.md"],
+              "area:frontend": ["src/", "content/", "public/", "docs/", "templates/"],
+              "area:backend": ["docs/", "frameworks/", "templates/"],
+              "area:db": ["docs/", "templates/"],
+              "area:sre": [".github/", "docs/", "frameworks/", "templates/"],
+              "area:security": [".github/", "docs/", "frameworks/", "templates/", "src/", "content/"],
+              "area:release": [".github/", "docs/", "templates/", "README.md"],
+              "area:design": ["docs/", "content/", "src/", "public/", "templates/"]
+            };
+
+            const allowPrefixes = allowlistByArea[area];
+            if (!allowPrefixes) {
+              core.setFailed(`Unsupported area label '${area}' for scope enforcement.`);
+              return;
+            }
+
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner,
+              repo,
+              pull_number: pr.number,
+              per_page: 100
+            });
+
+            const changed = files.map((f) => f.filename);
+            const disallowed = changed.filter((f) => !allowPrefixes.some((prefix) => f === prefix || f.startsWith(prefix)));
+
+            if (disallowed.length > 0) {
+              core.setFailed(
+                `PR changes violate scope for ${area}. Allowed prefixes: ${allowPrefixes.join(", ")}. Disallowed files: ${disallowed.join(", ")}`
+              );
+            }
+
+  proof-artifact-comment-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate linked issue proof comment exists
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issueNumberMatch = `${pr.title || ""}\n${pr.body || ""}`.match(/#(\d+)/);
+
+            if (!issueNumberMatch) {
+              core.setFailed("Could not determine linked issue number from PR title/body. Include 'Closes #<number>' in PR.");
+              return;
+            }
+
+            const issue_number = Number(issueNumberMatch[1]);
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number,
+              per_page: 100
+            });
+
+            const prUrl = pr.html_url;
+            const shaRegex = /\b[0-9a-f]{40}\b/i;
+            const validationRegex = /(Validation:|lint\s*✅|typecheck\s*✅|test\s*✅|build\s*✅)/i;
+
+            const proofComment = comments.find((c) => {
+              const body = c.body || "";
+              return body.includes(prUrl) && shaRegex.test(body) && validationRegex.test(body);
+            });
+
+            if (!proofComment) {
+              core.setFailed(
+                `No linked issue comment on #${issue_number} contains required proof bundle for this PR (${prUrl}). Expected PR URL + 40-char commit SHA + validation summary.`
+              );
+            }
