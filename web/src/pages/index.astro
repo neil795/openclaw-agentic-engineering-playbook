@@ -206,13 +206,36 @@ const meta = metaEntry?.data;
 
     <section id="trust" class="section section-primary" aria-labelledby="trust-title" data-section>
       <div class="container-wide">
-        <h2 id="trust-title" data-reveal>Trust Layer</h2>
-        <p class="subtitle" data-reveal>Trusted across enterprise, scale-up, and research environments with measured delivery outcomes.</p>
-        <div class="logo-strip" aria-label="Organizations and institutions" data-reveal>
-          <span>ANZ</span>
-          <span>Humanforce</span>
-          <span>mPrest</span>
-          <span>Monash</span>
+        <h2 id="trust-title" data-reveal>Where I've Delivered</h2>
+        <div class="company-grid" aria-label="Organizations and industries" data-reveal>
+          <article class="company-card"><strong>ANZ Bank</strong><span>Banking · Enterprise</span></article>
+          <article class="company-card"><strong>Humanforce</strong><span>Workforce SaaS · Scale-up</span></article>
+          <article class="company-card"><strong>mPrest</strong><span>Critical Systems · Defense Tech</span></article>
+          <article class="company-card"><strong>Monash University</strong><span>Research · Higher Education</span></article>
+        </div>
+
+        <div class="testimonials">
+          <div class="testimonial-card">
+            <p class="testimonial-quote">Neil has the rare combination of being a brilliant engineer who is socially intelligent and driven to make a meaningful impact.</p>
+            <div class="testimonial-author">
+              <strong>Sourasree Ghosh</strong>
+              <span>Product Area Lead · ANZ</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">Neil demonstrated sharp insight and ability to see the big picture. He was quick to grasp new concepts and put them to work — always questioning what could be improved. An invaluable team member I would love to work with again.</p>
+            <div class="testimonial-author">
+              <strong>Guillermo Rodriguez Alegria</strong>
+              <span>DevOps Manager & Platform Architect · Humanforce</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">One of the most versatile and dependable engineers I've worked with. His contributions were instrumental — from uplifting observability across our platforms to implementing a robust test automation framework for critical services.</p>
+            <div class="testimonial-author">
+              <strong>Angus Ng</strong>
+              <span>Tech Leadership / DevSecOps / SRE · ANZ (Direct Manager)</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -326,8 +349,18 @@ const meta = metaEntry?.data;
   .tag-row { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg); }
   .tag-row span { border: 1px solid var(--border-medium); color: var(--text-secondary); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-md); font-size: var(--text-small); }
 
-  .logo-strip { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg); }
-  .logo-strip span { border: 1px solid var(--border-medium); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-md); font-size: var(--text-small); color: var(--text-primary); font-weight: 500; letter-spacing: var(--tracking-wide); }
+  .company-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.25rem; }
+  .company-card { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .company-card strong { color: var(--text-primary); font-size: 0.95rem; }
+  .company-card span { color: var(--text-muted); font-size: 0.78rem; }
+
+  .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+  .testimonial-card { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; }
+  .testimonial-card::before { content: '\201C'; font-size: 2.5rem; line-height: 1; color: var(--text-accent); opacity: 0.4; font-family: Georgia, serif; }
+  .testimonial-quote { font-size: 0.9375rem; line-height: 1.65; color: var(--text-secondary); font-style: italic; margin: 0; }
+  .testimonial-author { display: flex; flex-direction: column; gap: 0.2rem; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle); }
+  .testimonial-author strong { font-family: var(--font-heading); font-size: 0.875rem; font-weight: 600; color: var(--text-primary); font-style: normal; }
+  .testimonial-author span { font-size: 0.75rem; color: var(--text-muted); font-style: normal; }
 
   .cta p { color: var(--text-secondary); }
   .cta-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg); }
@@ -344,6 +377,9 @@ const meta = metaEntry?.data;
     .headline-text .proof-pills { justify-content: center; }
     .icon-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); }
     .icon-grid img:nth-child(n+7) { display: none; }
+
+    .company-grid { grid-template-columns: 1fr 1fr; }
+    .testimonials { grid-template-columns: 1fr; }
 
     .timeline::before { display: none; }
     .timeline-item { grid-template-columns: 1fr; gap: var(--space-sm); }
