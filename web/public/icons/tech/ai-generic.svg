@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <rect x="10" y="10" width="108" height="108" rx="20" fill="currentColor" opacity="0.22"/>
+  <circle cx="64" cy="46" r="16" fill="currentColor" opacity="0.5"/>
+  <rect x="30" y="74" width="68" height="18" rx="9" fill="currentColor" opacity="0.42"/>
+  <text x="64" y="112" text-anchor="middle" font-size="12" font-family="Arial, sans-serif" fill="currentColor">AI GENERIC</text>
+</svg>
