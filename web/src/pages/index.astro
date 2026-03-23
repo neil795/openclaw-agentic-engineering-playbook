@@ -21,8 +21,8 @@ const countMetaByLabel: Record<string, { from: number; to: number }> = {
   'Build failures': { from: 0, to: 40 },
 };
 
-const platformIcons = ['kubernetes','docker','gcp','aws','opentelemetry','terraform','github','github-actions','nginx','linux','helm','prometheus'];
-const dataIcons = ['spark','kafka','python','tensorflow','pandas','numpy','jupyter','hadoop','databricks','grafana','flink','ai-generic'];
+const platformIcons = ['helm','docker','gcp','aws','opentelemetry','terraform','github','github-actions','nginx','linux','openshift','prometheus'];
+const dataIcons = ['spark','kafka','python','tensorflow','pandas','numpy','jupyter','postgresql','databricks','grafana','flink','ai-generic'];
 
 const meta = metaEntry?.data;
 ---
@@ -30,15 +30,20 @@ const meta = metaEntry?.data;
 <Layout>
   <SiteNav />
   <main id="main-content">
-    <section class="section section-deep" data-section>
-      <div class="container-wide">
-        <p class="eyebrow">NEIL SINHA · PLATFORM + AI ENGINEERING</p>
-        <h1>I design systems that are both reliable and adaptive.</h1>
-        <p class="subtitle">{meta?.heroSubtitle}</p>
-        <div class="proof-pills" aria-label="Outcome highlights" data-reveal-stagger>
-          <span data-reveal>83% faster build cycles</span>
-          <span data-reveal>−40% CI build failures</span>
-          <span data-reveal>RTO 8h → 4h</span>
+    <section class="section section-deep headline-section" data-section>
+      <div class="container-wide headline-content">
+        <div class="headline-text">
+          <p class="eyebrow">NEIL SINHA · PLATFORM + AI ENGINEERING</p>
+          <h1>I design systems that are both reliable and adaptive.</h1>
+          <p class="subtitle">{meta?.heroSubtitle}</p>
+          <div class="proof-pills" aria-label="Outcome highlights" data-reveal-stagger>
+            <span data-reveal>83% faster build cycles</span>
+            <span data-reveal>−40% CI build failures</span>
+            <span data-reveal>RTO 8h → 4h</span>
+          </div>
+        </div>
+        <div class="headline-photo">
+          <img src="/images/neil-sinha-headshot.png" alt="Neil Sinha — Senior Platform and AI-ML Engineer" width="280" height="280" loading="eager" />
         </div>
       </div>
     </section>
@@ -242,6 +247,20 @@ const meta = metaEntry?.data;
   .proof-pills { display: flex; gap: 0.75rem; flex-wrap: wrap; }
   .proof-pills span { border: 1px solid var(--border-medium); border-radius: 6px; padding: 6px 14px; font-size: 13px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
 
+  .headline-section .container-wide { max-width: 960px; margin: 0 auto; padding: 5rem 2rem 3rem; }
+  .headline-content { display: flex; align-items: center; gap: 3rem; }
+  .headline-text { flex: 1; min-width: 0; }
+  .headline-photo { flex-shrink: 0; }
+  .headline-photo img {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 20%;
+    border: 3px solid rgba(148, 163, 184, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
   .hero-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-subtle) 20%, var(--border-subtle) 80%, transparent); }
 
   .split-hero { display: grid; grid-template-columns: 1fr 1fr; width: 100%; min-height: 420px; }
@@ -319,6 +338,10 @@ const meta = metaEntry?.data;
     .split-hero { grid-template-columns: 1fr; }
     .panel-right { clip-path: none; margin-left: 0; padding-left: 3rem; }
     .panel { min-height: 260px; padding: 2rem 1.5rem; }
+
+    .headline-content { flex-direction: column; align-items: center; text-align: center; gap: 2rem; }
+    .headline-photo img { width: 180px; height: 180px; }
+    .headline-text .proof-pills { justify-content: center; }
     .icon-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); }
     .icon-grid img:nth-child(n+7) { display: none; }
 
