@@ -88,16 +88,16 @@ const meta = metaEntry?.data;
         <h2 id="problem-title" data-reveal>Problem Landscape</h2>
         <div class="problem-grid" data-reveal-stagger>
           <article data-reveal>
-            <p class="stat"><span data-count-from="0" data-count-to="32">32</span>%</p>
-            <p>Cloud spend routinely wasted without active controls.</p>
+            <p class="stat"><span class="stat-value" data-count-from="0" data-count-to="32">32</span><span class="stat-suffix">%</span></p>
+            <p class="stat-label">Cloud spend routinely wasted without active controls.</p>
           </article>
           <article data-reveal>
-            <p class="stat"><span data-count-from="0" data-count-to="1">1</span> in 5</p>
-            <p>Deployments fail in teams lacking CI reliability discipline.</p>
+            <p class="stat"><span class="stat-value" data-count-from="0" data-count-to="20">20</span><span class="stat-suffix">%</span></p>
+            <p class="stat-label">Deployments fail in teams lacking CI reliability discipline.</p>
           </article>
           <article data-reveal>
-            <p class="stat">High</p>
-            <p>AI-assisted delivery risk rises when governance is ad hoc.</p>
+            <p class="stat"><span class="stat-value" data-count-from="0" data-count-to="63">63</span><span class="stat-suffix">%</span></p>
+            <p class="stat-label">Organizations lack AI governance policies when breaches occur.</p>
           </article>
         </div>
       </div>
@@ -198,10 +198,26 @@ const meta = metaEntry?.data;
       <div class="container-wide">
         <h2 id="web-foundry-title" data-reveal>Web Foundry</h2>
         <p class="subtitle" data-reveal>Director & Founder · Est. 2025</p>
-        <article class="web-foundry-card" data-reveal>
-          <p>Operator-led consulting across platform modernization, cost governance, and release reliability for delivery-focused teams.</p>
-          <div class="tag-row"><span>Cloud Cost Control</span><span>CI/CD Reliability</span><span>AI Governance Controls</span></div>
-        </article>
+        <p class="wf-subtitle" data-reveal>Operator-led engineering consulting for teams that need to ship reliably without burning budget.</p>
+        <div class="wf-services" data-reveal-stagger>
+          <div class="wf-service" data-reveal>
+            <h3>Cloud Cost Audits</h3>
+            <p>Identify wasted spend, rightsize infrastructure, and implement cost governance controls that keep budgets predictable as you scale.</p>
+          </div>
+          <div class="wf-service" data-reveal>
+            <h3>CI/CD Reliability</h3>
+            <p>Diagnose pipeline instability, reduce build failures, and establish repeatable release patterns that teams can trust.</p>
+          </div>
+          <div class="wf-service" data-reveal>
+            <h3>Platform Modernization</h3>
+            <p>Migrate legacy infrastructure to modern cloud-native patterns — containers, orchestration, infrastructure as code — without disrupting delivery.</p>
+          </div>
+          <div class="wf-service" data-reveal>
+            <h3>AI Governance Frameworks</h3>
+            <p>Design review gates, validation workflows, and safety controls for teams adopting AI-assisted development at speed.</p>
+          </div>
+        </div>
+        <p class="wf-closing" data-reveal>Engagements start with a scoped systems review. No long-term contracts.</p>
       </div>
     </section>
 
@@ -247,9 +263,9 @@ const meta = metaEntry?.data;
         <p>{meta?.ctaConsulting}</p>
         <p class="contact-lines">Business inquiries: neil@webfoundryprivatelimited.com<br />Career opportunities: aaditya.n.sinha@gmail.com</p>
         <div class="cta-actions" role="group" aria-label="Contact actions">
-          <a class="btn" href="mailto:neil@webfoundryprivatelimited.com?subject=Web%20Foundry%20Inquiry">Get in touch</a>
-          <a class="btn" href="https://www.linkedin.com/in/aaditya-neil-sinha/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a class="btn" href="/neil-sinha-resume.pdf" target="_blank" rel="noopener noreferrer">Download resume</a>
+          <a class="btn cta-btn-primary" href="mailto:neil@webfoundryprivatelimited.com?subject=Web%20Foundry%20Inquiry">Get in touch</a>
+          <a class="btn cta-btn-secondary" href="https://www.linkedin.com/in/aaditya-neil-sinha/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="btn cta-btn-tertiary" href="/neil-sinha-resume.pdf" target="_blank" rel="noopener noreferrer">Download resume</a>
         </div>
       </div>
     </section>
@@ -315,7 +331,9 @@ const meta = metaEntry?.data;
   .problem-grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
   .problem-grid article { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-lg); }
   .problem-grid p { color: var(--text-secondary); }
-  .stat { margin: 0 0 var(--space-sm); color: var(--text-accent); font-size: var(--text-stat); font-weight: 700; }
+  .stat { margin: 0 0 var(--space-sm); font-size: var(--text-stat); font-weight: 700; }
+  .stat-value, .stat-suffix { color: #60A5FA; }
+  .stat-label { color: var(--text-secondary); margin: 0; }
 
   .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg); }
   .flat-block p { color: var(--text-secondary); }
@@ -347,10 +365,12 @@ const meta = metaEntry?.data;
   .timeline-body p, .timeline-body li { color: var(--text-secondary); font-size: 1.02rem; line-height: 1.65; }
   .timeline-body ul { margin: var(--space-sm) 0 0; padding-left: 1.1rem; }
 
-  .web-foundry-card { background: var(--bg-elevated); border: 1px solid var(--border-accent); border-radius: var(--radius-lg); padding: var(--space-xl); }
-  .web-foundry-card p { color: var(--text-secondary); }
-  .tag-row { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg); }
-  .tag-row span { border: 1px solid var(--border-medium); color: var(--text-secondary); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-md); font-size: var(--text-small); }
+  .wf-subtitle { font-size: 1.1rem; color: #94A3B8; max-width: 640px; line-height: 1.6; margin-bottom: 2.5rem; }
+  .wf-services { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+  .wf-service { background: var(--bg-elevated, #1E293B); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 12px; padding: 1.5rem; }
+  .wf-service h3 { font-size: 1rem; font-weight: 700; color: #F1F5F9; margin-bottom: 0.5rem; margin-top: 0; }
+  .wf-service p { font-size: 0.875rem; color: #94A3B8; line-height: 1.6; margin: 0; }
+  .wf-closing { font-size: 0.875rem; color: #64748B; font-style: italic; }
 
   .company-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.25rem; }
   .company-card { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; }
@@ -368,8 +388,13 @@ const meta = metaEntry?.data;
   .cta p { color: var(--text-secondary); }
   .contact-lines { font-size: 0.875rem; color: var(--text-muted); margin-top: -0.5rem; margin-bottom: 0.5rem; line-height: 1.55; }
   .cta-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg); }
-  .btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; border-radius: var(--radius-md); padding: 0.6rem 0.95rem; color: var(--text-primary); background: var(--bg-elevated); border: 1px solid var(--border-subtle); }
-  .btn:hover { border-color: var(--border-accent); background: var(--accent-glow); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+  .cta-btn-primary { background: #3B82F6; color: #FFFFFF; border: none; border-radius: 8px; padding: 12px 28px; font-weight: 600; text-decoration: none; transition: background 250ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; }
+  .cta-btn-primary:hover { background: #2563EB; transform: translateY(-1px); }
+  .cta-btn-secondary { background: transparent; color: #F1F5F9; border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 8px; padding: 12px 28px; font-weight: 500; text-decoration: none; transition: border-color 250ms ease, background 250ms ease; cursor: pointer; }
+  .cta-btn-secondary:hover { border-color: rgba(148, 163, 184, 0.4); background: rgba(148, 163, 184, 0.05); }
+  .cta-btn-tertiary { background: none; color: #94A3B8; border: none; border-bottom: 1px solid rgba(148, 163, 184, 0.15); border-radius: 0; padding: 12px 8px; font-weight: 500; text-decoration: none; transition: color 250ms ease, border-color 250ms ease; cursor: pointer; }
+  .cta-btn-tertiary:hover { color: #F1F5F9; border-bottom-color: rgba(148, 163, 184, 0.4); }
 
   @media (max-width: 768px) {
     .split-hero { grid-template-columns: 1fr; }
@@ -384,6 +409,9 @@ const meta = metaEntry?.data;
 
     .company-grid { grid-template-columns: 1fr 1fr; }
     .testimonials { grid-template-columns: 1fr; }
+    .wf-services { grid-template-columns: 1fr; }
+    .cta-actions { flex-direction: column; align-items: stretch; }
+    .cta-btn-primary, .cta-btn-secondary { width: 100%; text-align: center; }
 
     .timeline::before { display: none; }
     .timeline-item { grid-template-columns: 1fr; gap: var(--space-sm); }
