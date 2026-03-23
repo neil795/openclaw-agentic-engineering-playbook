@@ -1,6 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
-  <rect x="10" y="10" width="108" height="108" rx="20" fill="currentColor" opacity="0.22"/>
-  <circle cx="64" cy="46" r="16" fill="currentColor" opacity="0.5"/>
-  <rect x="30" y="74" width="68" height="18" rx="9" fill="currentColor" opacity="0.42"/>
-  <text x="64" y="112" text-anchor="middle" font-size="12" font-family="Arial, sans-serif" fill="currentColor">PANDAS</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#130754" d="M46.236 7.567h13.99v29.047h-13.99Zm0 59.668h13.99V96.28h-13.99Z"/><path fill="#ffca00" d="M46.236 45.092h13.99v13.705h-13.99Z"/><path fill="#130754" d="M23.763 31.446h13.989V128h-13.99ZM68.245 91.2h13.99v29.046h-13.99Zm0-59.72h13.99v29.047h-13.99Z"/><path fill="#e70488" d="M68.245 69.011h13.99v13.705h-13.99Z"/><path fill="#130754" d="M90.248 0h13.99v96.554h-13.99Z"/></svg>
