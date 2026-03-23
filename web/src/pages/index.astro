@@ -21,36 +21,16 @@ const countMetaByLabel: Record<string, { from: number; to: number }> = {
   'Build failures': { from: 0, to: 40 },
 };
 
+const platformIcons = ['kubernetes','docker','gcp','aws','openshift','terraform','github','github-actions','nginx','linux','helm','prometheus'];
+const dataIcons = ['spark','kafka','python','tensorflow','pandas','numpy','jupyter','postgresql','redis','grafana','flink','ai-generic'];
+
 const meta = metaEntry?.data;
 ---
 
 <Layout>
   <SiteNav />
   <main id="main-content">
-    <section id="hero" class="hero-split" data-section>
-      <div class="hero-panels">
-        <article class="hero-panel hero-panel-platform">
-          <p class="hero-label">PLATFORM / DEVOPS</p>
-          <h2>I break things less.</h2>
-          <ul>
-            <li>Delivery discipline</li>
-            <li>CI/CD reliability</li>
-            <li>Cloud cost control</li>
-          </ul>
-        </article>
-        <article class="hero-panel hero-panel-data">
-          <p class="hero-label hero-label-accent">DATA / AI SYSTEMS</p>
-          <h2>I make systems smarter.</h2>
-          <ul>
-            <li>Streaming pipelines</li>
-            <li>AI governance controls</li>
-            <li>Automation at scale</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="hero-unified" data-section>
+    <section class="headline-section" data-section>
       <div class="container-narrow">
         <p class="eyebrow">NEIL SINHA · PLATFORM + AI ENGINEERING</p>
         <h1>I design systems that are both reliable and adaptive.</h1>
@@ -62,6 +42,41 @@ const meta = metaEntry?.data;
         </div>
       </div>
     </section>
+
+    <div class="hero-divider" aria-hidden="true"></div>
+
+    <section class="split-hero" id="hero" data-section>
+      <div class="panel panel-left">
+        <div class="icon-grid" aria-hidden="true">
+          {platformIcons.map((icon) => <img src={`/icons/tech/${icon}.svg`} alt="" loading="lazy" />)}
+        </div>
+        <div class="panel-content">
+          <span class="panel-label">Platform / DevOps</span>
+          <h2 class="panel-headline">I break things less.</h2>
+          <ul class="panel-list">
+            <li>Delivery discipline</li>
+            <li>CI/CD reliability</li>
+            <li>Cloud cost control</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel panel-right">
+        <div class="icon-grid" aria-hidden="true">
+          {dataIcons.map((icon) => <img src={`/icons/tech/${icon}.svg`} alt="" loading="lazy" />)}
+        </div>
+        <div class="panel-content">
+          <span class="panel-label">Data / AI Systems</span>
+          <h2 class="panel-headline">I make systems smarter.</h2>
+          <ul class="panel-list">
+            <li>Streaming pipelines</li>
+            <li>AI governance controls</li>
+            <li>Automation at scale</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="hero-divider" aria-hidden="true"></div>
 
     <section id="problem-landscape" class="section section-deep" aria-labelledby="problem-title" data-section>
       <div class="container-narrow">
@@ -175,7 +190,7 @@ const meta = metaEntry?.data;
     </section>
 
     <section id="web-foundry" class="section section-primary" aria-labelledby="web-foundry-title" data-section>
-      <div class="container-narrow">
+      <div class="container-wide">
         <h2 id="web-foundry-title" data-reveal>Web Foundry</h2>
         <article class="web-foundry-card" data-reveal>
           <p>Operator-led consulting across platform modernization, cost governance, and release reliability for delivery-focused teams.</p>
@@ -185,7 +200,7 @@ const meta = metaEntry?.data;
     </section>
 
     <section id="trust" class="section section-primary" aria-labelledby="trust-title" data-section>
-      <div class="container-narrow">
+      <div class="container-wide">
         <h2 id="trust-title" data-reveal>Trust Layer</h2>
         <p class="subtitle" data-reveal>Trusted across enterprise, scale-up, and research environments with measured delivery outcomes.</p>
         <div class="logo-strip" aria-label="Organizations and institutions" data-reveal>
@@ -198,7 +213,7 @@ const meta = metaEntry?.data;
     </section>
 
     <section id="contact" class="section section-deep cta" aria-labelledby="contact-title" data-section data-reveal>
-      <div class="container-narrow">
+      <div class="container-wide">
         <h2 id="contact-title">{meta?.ctaPrimary}</h2>
         <p>{meta?.ctaConsulting}</p>
         <div class="cta-actions" role="group" aria-label="Contact actions">
@@ -211,7 +226,7 @@ const meta = metaEntry?.data;
 </Layout>
 
 <style>
-  .container-narrow { max-width: var(--content-max-width); margin: 0 auto; padding: 0 1.25rem; }
+  .container-narrow { max-width: 680px; margin: 0 auto; padding: 0 2rem; }
   .container-wide { max-width: var(--content-wide-max-width); margin: 0 auto; padding: 0 1.25rem; }
 
   .section { padding-top: var(--space-section); padding-bottom: var(--space-section); }
@@ -219,36 +234,37 @@ const meta = metaEntry?.data;
   .section-surface { background: var(--bg-surface); }
   .section-deep { background: var(--bg-deep); }
 
-  .hero-split { background: var(--bg-primary); }
-  .hero-panels { display: grid; grid-template-columns: 1fr 1fr; min-height: 50vh; }
-  .hero-panel { padding: var(--space-3xl); }
-  .hero-panel h2 { margin: var(--space-sm) 0 var(--space-md); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--text-primary); font-weight: 700; }
-  .hero-panel ul { margin: 0; padding-left: 1.15rem; color: var(--text-secondary); font-size: var(--text-small); }
-  .hero-label { color: var(--text-muted); font-size: var(--text-label); letter-spacing: var(--tracking-widest); text-transform: uppercase; }
-  .hero-label-accent { color: var(--text-accent); }
-  .hero-panel-platform { background: var(--bg-elevated); }
-  .hero-panel-data { background: var(--bg-deep); clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%); }
-  .hero-panel-data h2 { font-family: var(--font-mono); }
+  .headline-section { max-width: 680px; margin: 0 auto; padding: 5rem 2rem 3rem; }
+  .eyebrow { font-family: var(--font-body); font-size: var(--text-label); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+  h1 { font-family: var(--font-heading); font-weight: 800; font-size: var(--text-hero); line-height: var(--leading-tight); letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 1.25rem; }
+  .subtitle { font-size: var(--text-body); line-height: var(--leading-normal); color: var(--text-secondary); max-width: 520px; margin-bottom: 1.5rem; }
+  .proof-pills { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .proof-pills span { border: 1px solid var(--border-medium); border-radius: 6px; padding: 6px 14px; font-size: 13px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
 
-  .hero-unified { background: var(--bg-primary); padding-top: var(--space-section); padding-bottom: var(--space-3xl); }
-  .eyebrow { color: var(--text-muted); font-size: var(--text-label); letter-spacing: var(--tracking-widest); text-transform: uppercase; }
-  h1 { font-size: var(--text-hero); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin: var(--space-sm) 0 var(--space-lg); max-width: 17ch; font-weight: 800; }
+  .hero-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-subtle) 20%, var(--border-subtle) 80%, transparent); }
+
+  .split-hero { display: grid; grid-template-columns: 1fr 1fr; width: 100%; min-height: 420px; }
+  .panel { position: relative; overflow: hidden; padding: 3rem; display: flex; align-items: center; }
+  .panel-left { background: var(--bg-elevated); }
+  .panel-right { background: var(--bg-deep); clip-path: polygon(6% 0, 100% 0, 100% 100%, 0% 100%); margin-left: -4%; padding-left: calc(3rem + 4%); }
+  .icon-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); padding: 2rem; pointer-events: none; z-index: 0; }
+  .icon-grid img { width: 100%; height: 100%; max-width: 52px; max-height: 52px; object-fit: contain; place-self: center; }
+  .panel-left .icon-grid img { opacity: 0.28; filter: brightness(0) invert(0.9); }
+  .panel-right .icon-grid img { opacity: 0.32; filter: brightness(0) invert(0.85) sepia(1) hue-rotate(182deg) saturate(5) brightness(1.2); }
+  .panel-content { position: relative; z-index: 1; }
+  .panel-label { font-family: var(--font-body); font-size: var(--text-label); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; display: block; color: var(--text-muted); }
+  .panel-right .panel-label { color: var(--text-accent); }
+  .panel-headline { font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 1.75rem); line-height: 1.25; color: var(--text-primary); margin-bottom: 1.25rem; }
+  .panel-left .panel-headline { font-family: var(--font-heading); }
+  .panel-right .panel-headline { font-family: var(--font-mono); }
+  .panel-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; margin: 0; }
+  .panel-list li { font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem; }
+  .panel-list li::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: var(--text-muted); flex-shrink: 0; }
+
   h2 { color: var(--text-primary); font-size: var(--text-section); margin: 0 0 var(--space-xl); font-weight: 700; }
   .section-title-primary { font-weight: 800; }
-  .section-title-primary::after {
-    content: '';
-    display: block;
-    width: 48px;
-    height: 3px;
-    margin-top: var(--space-sm);
-    background: var(--accent);
-    border-radius: 2px;
-  }
+  .section-title-primary::after { content: ''; display: block; width: 48px; height: 3px; margin-top: var(--space-sm); background: var(--accent); border-radius: 2px; }
   h3 { color: var(--text-primary); font-size: var(--text-card-title); margin: 0 0 var(--space-sm); font-weight: 700; }
-  .subtitle { color: var(--text-secondary); max-width: 600px; }
-
-  .proof-pills { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-lg); }
-  .proof-pills span { border: 1px solid var(--border-medium); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-md); font-size: var(--text-small); color: var(--text-secondary); font-variant-numeric: tabular-nums; }
 
   .problem-grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
   .problem-grid article { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-lg); }
@@ -259,14 +275,7 @@ const meta = metaEntry?.data;
   .flat-block p { color: var(--text-secondary); }
 
   .case-list { display: grid; gap: var(--space-lg); }
-  .case-card {
-    background: var(--bg-elevated);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    padding: var(--space-xl);
-    transition: all var(--duration-normal) var(--ease-out);
-  }
+  .case-card { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: var(--space-xl); transition: all var(--duration-normal) var(--ease-out); }
   .case-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); border-color: var(--border-medium); }
   .case-context { color: var(--text-accent); font-size: var(--text-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0 0 var(--space-xs); }
   .metric-row { display: grid; gap: var(--space-sm); grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin: var(--space-lg) 0; }
@@ -274,7 +283,7 @@ const meta = metaEntry?.data;
   .metric-value { margin: 0; color: var(--text-accent); font-weight: 700; font-size: 1.35rem; }
   .metric-label { margin: var(--space-xs) 0 0; color: var(--text-muted); font-size: var(--text-xs); }
   .case-card p { color: var(--text-secondary); }
-  .case-visual { width: 100%; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-md); margin-bottom: var(--space-md); }
+  .case-visual { width: 100%; background: var(--bg-primary); border-radius: var(--radius-md); padding: var(--space-lg); margin-bottom: var(--space-md); }
 
   .governance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-md); }
   .governance-card { background: var(--bg-elevated); border-radius: var(--radius-md); border: 1px solid var(--border-subtle); border-left: 3px solid var(--severity-high); padding: var(--space-lg); }
@@ -285,17 +294,7 @@ const meta = metaEntry?.data;
   .timeline { display: grid; gap: var(--space-lg); position: relative; }
   .timeline::before { content: ''; position: absolute; left: 201px; top: 0; bottom: 0; width: 2px; background: var(--border-subtle); }
   .timeline-item { display: grid; grid-template-columns: 200px 1fr; gap: var(--space-xl); position: relative; }
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: 194px;
-    top: 0.35rem;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--bg-elevated);
-    border: 2px solid var(--border-medium);
-  }
+  .timeline-item::before { content: ''; position: absolute; left: 194px; top: 0.35rem; width: 14px; height: 14px; border-radius: 50%; background: var(--bg-elevated); border: 2px solid var(--border-medium); }
   .timeline-item.current::before { background: var(--accent-glow); border-color: var(--accent); box-shadow: 0 0 0 6px var(--accent-glow); }
   .timeline-meta { color: var(--text-muted); font-size: var(--text-small); }
   .timeline-meta p { margin: 0 0 var(--space-xs); }
@@ -316,9 +315,11 @@ const meta = metaEntry?.data;
   .btn:hover { border-color: var(--border-accent); background: var(--accent-glow); }
 
   @media (max-width: 768px) {
-    .hero-panels { grid-template-columns: 1fr; min-height: auto; }
-    .hero-panel { padding: var(--space-xl); }
-    .hero-panel-data { clip-path: none; }
+    .split-hero { grid-template-columns: 1fr; }
+    .panel-right { clip-path: none; margin-left: 0; padding-left: 3rem; }
+    .panel { min-height: 260px; padding: 2rem; }
+    .icon-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); }
+    .icon-grid img:nth-child(n+7) { display: none; }
 
     .timeline::before { display: none; }
     .timeline-item { grid-template-columns: 1fr; gap: var(--space-sm); }
