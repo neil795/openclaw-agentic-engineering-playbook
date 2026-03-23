@@ -22,7 +22,7 @@ const countMetaByLabel: Record<string, { from: number; to: number }> = {
 };
 
 const platformIcons = ['kubernetes','docker','gcp','aws','openshift','terraform','github','github-actions','nginx','linux','helm','prometheus'];
-const dataIcons = ['spark','kafka','python','tensorflow','pandas','numpy','jupyter','postgresql','redis','grafana','flink','ai-generic'];
+const dataIcons = ['spark','kafka','python','tensorflow','pandas','numpy','jupyter','hadoop','databricks','grafana','flink','ai-generic'];
 
 const meta = metaEntry?.data;
 ---
@@ -257,8 +257,7 @@ const meta = metaEntry?.data;
   .panel-right .panel-label { color: #FBBF24; }
   .panel-headline { font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 1.75rem); line-height: 1.25; color: var(--text-primary); margin-bottom: 1.25rem; }
   .panel-left .panel-headline { font-family: var(--font-heading); }
-  .panel-right .panel-headline { font-family: var(--font-mono); }
-  .panel-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; margin: 0; }
+    .panel-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; margin: 0; }
   .panel-list li { font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem; }
   .panel-list li::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: var(--text-muted); flex-shrink: 0; }
 
